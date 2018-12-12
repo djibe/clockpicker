@@ -167,26 +167,13 @@
 
     if (!options.autoclose) {
       // If autoclose is not setted, append a button
-      closeBlock
-        .append(
-          '<button type="button" class="btn btn-sm btn-outline-primary">' +
-            options.canceltext +
-            "</button>"
-        )
-        .on("click", function() {
-          $(this)
-            .closest(".clockpicker-popover")
-            .hide();
-        });
+      $("<a class='btn btn-sm btn-outline-primary'>" + options.canceltext + '</a>')
+          .on("click", $.proxy(this.hide, this))
+          .appendTo(closeBlock);
 
-      closeBlock
-        .css("display", "flex")
-        .append(
-          '<button type="button" class="btn btn-sm btn-outline-primary">' +
-            options.donetext +
-            "</button>"
-        )
-        .click($.proxy(this.done, this));
+      $("<a class='btn btn-sm btn-outline-primary'>" + options.donetext + '</a>')
+          .on("click", $.proxy(this.done, this))
+          .appendTo(closeBlock);
     }
 
     // Placement and arrow align - make sure they make sense.
